@@ -5,6 +5,10 @@ The backend for 2D Transformation Visualizer. Made by Ahmad Zaki Akmal, 21/48017
 
 
 ### How To Run
+Simply run `launch.exe` or `launch.bat`
+
+or
+
 1. install dependencies
  ```
  pip install -r requirements.txt
