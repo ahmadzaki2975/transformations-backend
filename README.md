@@ -20,3 +20,8 @@ or
  ```
  
  3. open the frontend [here](https://transformations-frontend.vercel.app)
+
+### Example
+Berikut contoh transformasi yang dilakukan, objek yang tergambar dengan garis biru dashed adalah objek original, sementara objek dengan garis merah adalah objek setelahd ditransformasi.
+
+![](https://raw.githubusercontent.com/ahmadzaki2975/transformations-backend/main/Example.jpg)
