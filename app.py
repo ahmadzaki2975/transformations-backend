@@ -1,7 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import io
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -12,9 +15,8 @@ def index():
 
 @app.route('/transform', methods=['POST'])
 def transform():
-    # receive the request
+    # receive datas
     data = request.get_json()
-
     n = data["n"]
     coordinates = data["coordinates"]
     vertices = []
@@ -25,7 +27,6 @@ def transform():
     sy = data["sy"]
     shx = data["shx"]
     shy = data["shy"]
-    # convert angle to radians
     angle = data["angle"] * np.pi / 180
     transformed_vertices = []
 
@@ -36,7 +37,7 @@ def transform():
         temp_y = float(coordinates[i]['y'])
         vertices.append([temp_x, temp_y, 1])
 
-    print(vertices)
+    # print(vertices)
 
     # combine each vertex to the next to create a side, combine the last with the first to form the last side
     for i in range(n):
@@ -110,9 +111,12 @@ def transform():
     plt.gca().set_aspect('equal', adjustable='box')
     # plt.gca().invert_xaxis()
     # plt.gca().invert_yaxis()
-    plt.show()
+    # plt.show()
 
-
-    return jsonify(data)
+    img_buffer = io.BytesIO()
+    plt.savefig(img_buffer, format='png')
+    img_buffer.seek(0)
+    plt.close()
+    return send_file(img_buffer, mimetype='image/png')
 
 
