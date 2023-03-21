@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import io
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app)
+cors = CORS(app, origins=["http://localhost:3000", "https://transformations-frontend.vercel.app"])
 
 @app.route('/')
 def index():
